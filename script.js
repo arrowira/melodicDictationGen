@@ -67,6 +67,8 @@ const numNotes = {
 };
 
 
+
+
 //WWHWWWH 8 noteMap
 let major = [0, 2, 4, 5, 7, 9, 11, 12]
 
@@ -75,6 +77,8 @@ let beats = 32
 let quarterNoteLength = 0.4
 
 let audioCtx;
+
+let tempoWeight = 3;
 
 function randomNumWeighted(min, max, weight = 1) {
     // weight > 1 → favors lower numbers
@@ -91,6 +95,12 @@ function randomInt(min, max, weight = 1) {
 
 function playMelody() {
     
+    quarterNoteLength = Number(document.getElementById("QNlength").value);
+    beats = Number(document.getElementById("length").value);
+    tempoWeight = Number(document.getElementById("tempo").value);
+
+    
+
     if (!audioCtx) {
         audioCtx = new AudioContext();
     }
@@ -99,11 +109,11 @@ function playMelody() {
     let startTime = audioCtx.currentTime;
 
     let notes = [];
-    let unusedBeats = 16
+    let unusedBeats = beats
     notes.push([numNotes[0],1]);
     while (unusedBeats > 4){
         let setNoteFreq = numNotes[major[randomInt(0,8)]];
-        let noteLength = randomInt(1,5, 3);
+        let noteLength = randomInt(1,5, tempoWeight);
         unusedBeats-=noteLength;
         notes.push([setNoteFreq,noteLength]);
     }

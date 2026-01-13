@@ -10,7 +10,18 @@
 </head>
 <body>
 
-    <h1>Hello World</h1>
+    <h1>Melodic dictation generator</h1>
+    <p>
+        <!-- melody parameters -->
+        <label>length (beats)</label>
+        <input type="number" id="length" value="16"></input>
+        <br>
+        <label>QNlength</label>
+        <input type="number" id="QNlength" value="0.4">(length of quarter note in seconds)</input>
+        <label>tempo</label>
+        <input type="number" id="tempo" value="3">(the larger the num, the faster the rhythm. stay below 5)</input>
+    </p>
+    
 
     <button onclick="playMelody()">Play melody</button>
 
