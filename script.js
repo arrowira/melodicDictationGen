@@ -150,7 +150,7 @@ function playMelody() {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
-        osc.type = "square";
+        osc.type = "sawtooth";
         
         osc.frequency.value = noteFreq;
 
