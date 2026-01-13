@@ -1,5 +1,5 @@
 
-const notes = {
+const noteMap = {
     "C4": 261.63,
     "C#4": 277.18,
     "Db4": 277.18,
@@ -39,36 +39,40 @@ const notes = {
     "C6": 1046.50
 };
 const numNotes = {
-    0: notes["C4"],
-    1: notes["C#4"],
-    2: notes["D4"],
-    3: notes["D#4"],
-    4: notes["E4"],
-    5: notes["F4"],
-    6: notes["F#4"],
-    7: notes["G4"],
-    8: notes["G#4"],
-    9: notes["A4"],
-    10: notes["A#4"],
-    11: notes["B4"],
-    12: notes["C5"],
-    13: notes["C#5"],
-    14: notes["D5"],
-    15: notes["D#5"],
-    16: notes["E5"],
-    17: notes["F5"],
-    18: notes["F#5"],
-    19: notes["G5"],
-    20: notes["G#5"],
-    21: notes["A5"],
-    22: notes["A#5"],
-    23: notes["B5"],
-    24: notes["C6"]
+    0: noteMap["C4"],
+    1: noteMap["C#4"],
+    2: noteMap["D4"],
+    3: noteMap["D#4"],
+    4: noteMap["E4"],
+    5: noteMap["F4"],
+    6: noteMap["F#4"],
+    7: noteMap["G4"],
+    8: noteMap["G#4"],
+    9: noteMap["A4"],
+    10: noteMap["A#4"],
+    11: noteMap["B4"],
+    12: noteMap["C5"],
+    13: noteMap["C#5"],
+    14: noteMap["D5"],
+    15: noteMap["D#5"],
+    16: noteMap["E5"],
+    17: noteMap["F5"],
+    18: noteMap["F#5"],
+    19: noteMap["G5"],
+    20: noteMap["G#5"],
+    21: noteMap["A5"],
+    22: noteMap["A#5"],
+    23: noteMap["B5"],
+    24: noteMap["C6"]
 };
 
 
-//WWHWWWH 8 notes
+//WWHWWWH 8 noteMap
 let major = [0, 2, 4, 5, 7, 9, 11, 12]
+
+let beats = 16
+
+let quarterNoteLength = 0.4
 
 let audioCtx;
 
@@ -77,7 +81,7 @@ function randomNum(min, max){
 }
 function randomInt(min, max){
     return Math.floor(randomNum(min,max))
-}
+}//from min (inclusive) to max (exclusive) AKA: [min,max)
 
 function playMelody() {
     
@@ -88,23 +92,42 @@ function playMelody() {
     
     let startTime = audioCtx.currentTime;
 
-    for (let i = 0; i<10; i++){
+    let notes = [];
+    let unusedBeats = 16
+    notes.push([numNotes[0],1]);
+    while (unusedBeats >= 5){
+        let setNoteFreq = numNotes[major[randomInt(0,8)]];
+        let noteLength = randomInt(1,5);
+        unusedBeats-=noteLength;
+        notes.push([setNoteFreq,noteLength]);
+    }
+
+    notes.push([numNotes[0],unusedBeats]);
+
+    let progress = 0;
+    
+    for (let i = 0; i<notes.length; i++){
+        let noteFreq = notes[i][0];
+        
+
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
         osc.type = "square";
-        let noteFreq = numNotes[major[randomInt(0,8)]]
+        
         osc.frequency.value = noteFreq;
 
-        gain.gain.setValueAtTime(0.2, startTime + i * 0.4);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + i * 0.4 + 0.35);
+        gain.gain.setValueAtTime(0.2, startTime + progress);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + progress + 2);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
 
-        osc.start(startTime + i * 0.4);
-        osc.stop(startTime + i * 0.4 + 0.4);
+        osc.start(startTime + progress);
+        osc.stop(startTime + progress + quarterNoteLength*(notes[i][1]));
 
+        progress += quarterNoteLength*(notes[i][1]);
     }
+    
 
 }
