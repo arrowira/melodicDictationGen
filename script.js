@@ -70,17 +70,23 @@ const numNotes = {
 //WWHWWWH 8 noteMap
 let major = [0, 2, 4, 5, 7, 9, 11, 12]
 
-let beats = 16
+let beats = 32
 
 let quarterNoteLength = 0.4
 
 let audioCtx;
 
-function randomNum(min, max){
-    return Math.random() * (max-min)+min;
+function randomNumWeighted(min, max, weight = 1) {
+    // weight > 1 → favors lower numbers
+    // weight < 1 → favors higher numbers
+    let t = Math.random();      // uniform [0,1)
+    t = Math.pow(t, weight);    // skew it
+    return t * (max - min) + min;
 }
-function randomInt(min, max){
-    return Math.floor(randomNum(min,max))
+
+
+function randomInt(min, max, weight = 1) {
+    return Math.floor(randomNumWeighted(min, max, weight));
 }//from min (inclusive) to max (exclusive) AKA: [min,max)
 
 function playMelody() {
@@ -95,9 +101,9 @@ function playMelody() {
     let notes = [];
     let unusedBeats = 16
     notes.push([numNotes[0],1]);
-    while (unusedBeats >= 5){
+    while (unusedBeats > 4){
         let setNoteFreq = numNotes[major[randomInt(0,8)]];
-        let noteLength = randomInt(1,5);
+        let noteLength = randomInt(1,5, 3);
         unusedBeats-=noteLength;
         notes.push([setNoteFreq,noteLength]);
     }
@@ -105,7 +111,28 @@ function playMelody() {
     notes.push([numNotes[0],unusedBeats]);
 
     let progress = 0;
-    
+
+    for (let i = 0; i<4; i++){
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = "square";
+        
+        osc.frequency.value = 800;
+
+        gain.gain.setValueAtTime(0.2, startTime + progress);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + progress + 0.1);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime + progress);
+        osc.stop(startTime + progress + quarterNoteLength*(notes[i][1]));
+
+        progress += quarterNoteLength*2;
+
+    }
+    //play melody
     for (let i = 0; i<notes.length; i++){
         let noteFreq = notes[i][0];
         
