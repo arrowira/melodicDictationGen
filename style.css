@@ -21,3 +21,23 @@ table div {
     height: 1px;
     background: black;
 }
+
+#parameters{
+    display: flex;
+    column-gap: 0px;
+}
+
+#paramVal{
+    flex: 1; 
+    padding: 10px;
+    border: 0px solid #ccc;
+}
+#paramDesc{
+    flex: 0.15; 
+    padding: 16px;
+    text-align: right;
+    border: 1px solid #ccc;
+}
+.paramLabel{
+    text-align: right;
+}

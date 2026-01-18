@@ -11,18 +11,23 @@
 <body>
 
     <h1>Melodic dictation generator</h1>
-    <p>
+    <div id = "parameters">
+    <div id = "paramDesc">  
         <!-- melody parameters -->
-        <label>length (beats)</label>
+        <label class = "paramLabel">beats:</label>
+        <br>
+        <label class = "paramLabel">QNlength:</label>
+        <br>
+        <label class = "paramLabel">tempo:</label>
+    </div>
+    <div id = "paramVal"> 
         <input type="number" id="length" value="8"></input>
         <br>
-        <label>QNlength</label>
         <input type="number" id="QNlength" value="0.4">(length of quarter note in seconds)</input>
         <br>
-        <label>tempo</label>
         <input type="number" id="tempo" value="3">(the larger the num, the faster the rhythm. stay below 5)</input>
-    </p>
-    
+    </div>
+    </div>
 
     <button onclick="playMelody()">Play melody</button>
 
