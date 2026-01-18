@@ -1,0 +1,23 @@
+#out {
+    margin-top: 5em;
+}
+table { 
+    border-collapse: collapse;
+    border-width: 0 1px;
+    border-color: black;
+    border-style: solid;
+}
+td {
+    height: .4em;
+    width: 3em;
+    padding: 0;
+}
+table td span {
+    position: absolute;
+    font-size: 70px;
+    margin-top: -70px;
+}
+table div {
+    height: 1px;
+    background: black;
+}

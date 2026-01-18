@@ -38,6 +38,39 @@ const noteMap = {
 
     "C6": 1046.50
 };
+
+const freqToNum = {
+    261.63: [0],          // C4
+    277.18: [1],          // C#4 / Db4
+    293.66: [1],          // D4
+    311.13: [3],          // D#4 / Eb4
+    329.63: [2],          // E4
+    349.23: [3],          // F4
+    369.99: [6],          // F#4 / Gb4
+    392.00: [4],          // G4
+    415.30: [8],          // G#4 / Ab4
+    440.00: [5],          // A4
+    466.16: [10],         // A#4 / Bb4
+    493.88: [6],         // B4
+
+    523.25: [7],         // C5
+    554.37: [13],         // C#5 / Db5
+    587.33: [14],         // D5
+    622.25: [15],         // D#5 / Eb5
+    659.25: [16],         // E5
+    698.46: [17],         // F5
+    739.99: [18],         // F#5 / Gb5
+    783.99: [19],         // G5
+    830.61: [20],         // G#5 / Ab5
+    880.00: [21],         // A5
+    932.33: [22],         // A#5 / Bb5
+    987.77: [23],         // B5
+
+    1046.50: [24]         // C6
+};
+
+
+
 const numNotes = {
     0: noteMap["C4"],
     1: noteMap["C#4"],
@@ -67,8 +100,6 @@ const numNotes = {
 };
 
 
-
-
 //WWHWWWH 8 noteMap
 let major = [0, 2, 4, 5, 7, 9, 11, 12]
 
@@ -79,6 +110,8 @@ let quarterNoteLength = 0.4
 let audioCtx;
 
 let tempoWeight = 3;
+
+
 
 function randomNumWeighted(min, max, weight = 1) {
     // weight > 1 → favors lower numbers
@@ -94,9 +127,11 @@ function randomInt(min, max, weight = 1) {
 }//from min (inclusive) to max (exclusive) AKA: [min,max)
 
 function playMelody() {
-    
+    const out = document.getElementById("out");
+    out.innerHTML = "";
+
     quarterNoteLength = Number(document.getElementById("QNlength").value);
-    beats = Number(document.getElementById("length").value);
+    beats = Number(document.getElementById("length").value)*2-1;
     tempoWeight = Number(document.getElementById("tempo").value);
 
     
@@ -122,6 +157,51 @@ function playMelody() {
 
     let progress = 0;
 
+    //create sheet music
+    let length = beats;
+    let drawingProgress = 0;
+    let index = 0;
+
+    const bar = document.createElement("table");
+    for (let row = 0; row < 10; row++) {
+        const tr = document.createElement("tr");
+        for (let col = 0; col < length; col++) {
+            const td = document.createElement("td");
+            
+            //create line
+            if (row % 2 == 0) {
+                td.appendChild(document.createElement("div"));
+            }
+            tr.appendChild(td);
+        }
+        bar.appendChild(tr);
+    }
+    out.appendChild(bar);
+    
+    for (let col = 0; col <length; col++){
+        for(let row = 0; row < 10; row++){
+            //place note
+            if (col == drawingProgress &&row == 7-freqToNum[notes[index][0]]) {
+                const note = document.createElement("span");
+                if (notes[index][1] == 4){
+                    note.innerText = "𝅗𝅥";
+                }else if (notes[index][1] == 3){
+                    note.innerText = "𝅘𝅥."
+                }else if (notes[index][1] == 2){
+                    note.innerText = "𝅘𝅥";
+                }else{
+                    note.innerText = "𝅘𝅥𝅮";
+                }
+                
+                drawingProgress+= notes[index][1];
+                bar.rows[row].cells[col].appendChild(note);
+                index++;
+                break;
+            }
+        }
+    }
+
+    //metronome
     for (let i = 0; i<4; i++){
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -150,7 +230,7 @@ function playMelody() {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
-        osc.type = "sawtooth";
+        osc.type = "square";
         
         osc.frequency.value = noteFreq;
 
