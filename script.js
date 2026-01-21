@@ -146,9 +146,21 @@ function playMelody() {
     let notes = [];
     let unusedBeats = beats
     notes.push([numNotes[0],1]);
-    while (unusedBeats > 4){
+    while (unusedBeats > 2){
         let setNoteFreq = numNotes[major[randomInt(0,8)]];
-        let noteLength = randomInt(1,5, tempoWeight);
+        let noteLength;
+        if (unusedBeats > 4){
+            noteLength = randomInt(1,5, tempoWeight);
+        }else{
+            if (unusedBeats > 3){
+                noteLength = randomInt(1,3,tempoWeight);
+            }
+            else{
+                noteLength = 1;
+            }
+            
+        }
+        
         unusedBeats-=noteLength;
         notes.push([setNoteFreq,noteLength]);
     }
