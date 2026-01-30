@@ -150,6 +150,7 @@ function playMelody() {
 
     bars = Math.ceil(beats/8);
 
+
     for (let b = 0; b<bars; b++){
         let measureNotes = [];
         let unusedBeats = 7;
@@ -163,9 +164,9 @@ function playMelody() {
         
         while (unusedBeats > 2){
             let setNoteFreq = numNotes[major[randomInt(0,8)]];
-            let noteLength;
+            let noteLength = 1;
             if (unusedBeats > 6){
-                noteLength = randomInt(1,2, tempoWeight);
+                noteLength = randomInt(1,5, tempoWeight);
             }else{
                 if (unusedBeats > 4){
                     noteLength = randomInt(1,2,tempoWeight);
@@ -187,11 +188,16 @@ function playMelody() {
         
 
         
-        for (let i = 0; i<7; i++){
+        for (let i = 0; i<measureNotes.length; i++){
+            if (measureNotes[i] == null){
+                alert("Error in note generation");
+                alert(measureNotes[i])
+            }
             notes.push(measureNotes[i]);
         }
         measure++;
     }
+   
 
     //create sheet music
     let progress = 0;
@@ -199,6 +205,8 @@ function playMelody() {
     let drawingProgress = 0;
     let index = 0;
 
+
+    //create staff
     const bar = document.createElement("table");
     for (let row = 0; row < 10; row++) {
         const tr = document.createElement("tr");
@@ -214,7 +222,9 @@ function playMelody() {
         bar.appendChild(tr);
     }
     out.appendChild(bar);
-    
+
+
+    //place notes
     for (let col = 0; col <length; col++){
         let placed = false;
         for(let row = 0; row < 10; row++){
