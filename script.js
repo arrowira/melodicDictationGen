@@ -127,6 +127,7 @@ function randomInt(min, max, weight = 1) {
 }//from min (inclusive) to max (exclusive) AKA: [min,max)
 
 function playMelody() {
+    //init and get params.
     const out = document.getElementById("out");
     out.innerHTML = "";
 
@@ -145,8 +146,9 @@ function playMelody() {
     
     let startTime = audioCtx.currentTime;
 
-    bars = Math.ceil(beats/8);
+    //generate notes by bar
 
+    bars = Math.ceil(beats/8);
 
     for (let b = 0; b<bars; b++){
         let measureNotes = [];
@@ -188,7 +190,6 @@ function playMelody() {
         }
         measure++;
     }
-    //alert(bars);
 
     //create sheet music
     let progress = 0;
