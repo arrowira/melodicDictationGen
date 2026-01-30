@@ -169,7 +169,7 @@ function playMelody() {
                 noteLength = randomInt(1,5, tempoWeight);
             }else{
                 if (unusedBeats > 4){
-                    noteLength = randomInt(1,2,tempoWeight);
+                    noteLength = randomInt(1,3,tempoWeight);
                 }
                 else{
                     noteLength = 1;
