@@ -130,6 +130,8 @@ function playMelody() {
     const out = document.getElementById("out");
     out.innerHTML = "";
 
+    let measure = 0;
+
     quarterNoteLength = Number(document.getElementById("QNlength").value);
     beats = Number(document.getElementById("length").value)*2-1;
     tempoWeight = Number(document.getElementById("tempo").value);
@@ -139,37 +141,57 @@ function playMelody() {
     if (!audioCtx) {
         audioCtx = new AudioContext();
     }
-
+    let notes = [];
     
     let startTime = audioCtx.currentTime;
 
-    let notes = [];
-    let unusedBeats = beats
-    notes.push([numNotes[0],1]);
-    while (unusedBeats > 2){
-        let setNoteFreq = numNotes[major[randomInt(0,8)]];
-        let noteLength;
-        if (unusedBeats > 4){
-            noteLength = randomInt(1,5, tempoWeight);
+    bars = Math.ceil(beats/8);
+
+
+    for (let b = 0; b<bars; b++){
+        let measureNotes = [];
+        let unusedBeats = 7;
+        if (measure == 0){
+            measureNotes.push([numNotes[0],1]);
         }else{
-            if (unusedBeats > 3){
-                noteLength = randomInt(1,3,tempoWeight);
-            }
-            else{
-                noteLength = 1;
-            }
-            
+            measureNotes.push([numNotes[major[randomInt(0,8)]],1]);
         }
         
-        unusedBeats-=noteLength;
-        notes.push([setNoteFreq,noteLength]);
+        while (unusedBeats > 2){
+            let setNoteFreq = numNotes[major[randomInt(0,8)]];
+            let noteLength;
+            if (unusedBeats > 6){
+                noteLength = randomInt(1,5, tempoWeight);
+            }else{
+                if (unusedBeats > 4){
+                    noteLength = randomInt(1,3,tempoWeight);
+                }
+                else{
+                    noteLength = 1;
+                }
+                
+            }
+            
+            unusedBeats-=noteLength;
+            measureNotes.push([setNoteFreq,noteLength]);
+        }
+        if (measure == bars-1){
+            measureNotes.push([numNotes[0],unusedBeats]);
+        }else{
+            measureNotes.push([numNotes[major[randomInt(0,8)]],unusedBeats]);
+        }
+        
+
+        
+        for (let i = 0; i<7; i++){
+            notes.push(measureNotes[i]);
+        }
+        measure++;
     }
-
-    notes.push([numNotes[0],unusedBeats]);
-
-    let progress = 0;
+    //alert(bars);
 
     //create sheet music
+    let progress = 0;
     let length = beats;
     let drawingProgress = 0;
     let index = 0;
@@ -209,6 +231,12 @@ function playMelody() {
                 bar.rows[row].cells[col].appendChild(note);
                 index++;
                 break;
+            }
+            if (col % 8 == 0){
+                //create bar line
+                const line = document.createElement("span");
+                line.innerText = "𝄀";
+                bar.rows[row].cells[col].appendChild(line);
             }
         }
     }
