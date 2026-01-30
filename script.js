@@ -153,6 +153,8 @@ function playMelody() {
     for (let b = 0; b<bars; b++){
         let measureNotes = [];
         let unusedBeats = 7;
+
+        //create first note
         if (measure == 0){
             measureNotes.push([numNotes[0],1]);
         }else{
@@ -163,10 +165,10 @@ function playMelody() {
             let setNoteFreq = numNotes[major[randomInt(0,8)]];
             let noteLength;
             if (unusedBeats > 6){
-                noteLength = randomInt(1,5, tempoWeight);
+                noteLength = randomInt(1,2, tempoWeight);
             }else{
                 if (unusedBeats > 4){
-                    noteLength = randomInt(1,3,tempoWeight);
+                    noteLength = randomInt(1,2,tempoWeight);
                 }
                 else{
                     noteLength = 1;
@@ -214,9 +216,10 @@ function playMelody() {
     out.appendChild(bar);
     
     for (let col = 0; col <length; col++){
+        let placed = false;
         for(let row = 0; row < 10; row++){
             //place note
-            if (col == drawingProgress &&row == 7-freqToNum[notes[index][0]]) {
+            if (col == drawingProgress &&row == 7-freqToNum[notes[index][0]] && !placed) {
                 const note = document.createElement("span");
                 if (notes[index][1] == 4){
                     note.innerText = "𝅗𝅥";
@@ -231,9 +234,9 @@ function playMelody() {
                 drawingProgress+= notes[index][1];
                 bar.rows[row].cells[col].appendChild(note);
                 index++;
-                break;
+                placed = true;
             }
-            if (col % 8 == 0){
+            if (col % 8 == 0 && row == 7){
                 //create bar line
                 const line = document.createElement("span");
                 line.innerText = "𝄀";
