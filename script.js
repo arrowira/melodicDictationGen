@@ -208,11 +208,13 @@ function playMelody() {
 
     //create staff
     const bar = document.createElement("table");
+    bar.id = "staff";
     for (let row = 0; row < 10; row++) {
         const tr = document.createElement("tr");
+        tr.id = "staffRow";
         for (let col = 0; col < length; col++) {
             const td = document.createElement("td");
-            
+            td.id = "staffCell";
             //create line
             if (row % 2 == 0) {
                 td.appendChild(document.createElement("div"));
@@ -246,7 +248,7 @@ function playMelody() {
                 index++;
                 placed = true;
             }
-            if (col % 8 == 0 && row == 7){
+            if ((col+1) % 8 == 0&& row == 7){
                 //create bar line
                 const line = document.createElement("span");
                 line.innerText = "𝄀";

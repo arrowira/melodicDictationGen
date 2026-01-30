@@ -1,23 +1,23 @@
 #out {
     margin-top: 5em;
 }
-table { 
+#staff { 
     border-collapse: collapse;
     border-width: 0 1px;
     border-color: black;
     border-style: solid;
 }
-td {
+#staffCell {
     height: .4em;
     width: 3em;
     padding: 0;
 }
-table td span {
+#staff #staffCell span {
     position: absolute;
     font-size: 68px;
     margin-top: -67px;
 }
-table div {
+#staff div {
     height: 1px;
     background: black;
 }
@@ -40,4 +40,9 @@ table div {
 }
 .paramLabel{
     text-align: right;
+}
+body{
+    background-color:rgb(215, 195, 219);
+    font-family: Arial, Helvetica, sans-serif;
+    color: black
 }
