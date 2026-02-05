@@ -9,20 +9,27 @@ h1 {
 
 #out {
     margin-top: 5em;
+    padding: 50px 0px 20px 0px;
+    background-color: rgb(104, 109, 115);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 #infoTable {
+    margin-left: 1em;
+
     margin-top: 1em;
     margin-bottom: 1em;
     border: 1px solid black;
     border-collapse: collapse;
-    background-color: rgb(234, 217, 233);
+    background-color: rgb(217, 224, 234);
     color: rgb(0, 0, 0);
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 #topBar{
     width: 100%;
     height: 4em;
     color: white;
-    background-color: rgb(120, 81, 128);
+    background-color: rgb(48, 53, 61);
 }
 
 #infoTable td{
@@ -31,13 +38,20 @@ h1 {
 #infoTable tr{
     border: 1px solid black;
 }
-#infoTable tr:nth-child(odd){
-    background-color: rgb(234, 217, 233);
-}
 #infoTable td:nth-child(odd){
-    background-color: rgb(221, 205, 220);
+    background-color: rgb(205, 213, 221);
 }
 
+button {
+    margin: 1em;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background-color: rgb(89, 110, 128);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
 
@@ -82,7 +96,35 @@ h1 {
     text-align: right;
 }
 body{
-    background-color:rgb(215, 195, 219);
+    background-color:rgb(66, 71, 82);
     font-family: Arial, Helvetica, sans-serif;
     color: black
+}
+
+
+.rainbow {
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+
+  background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
+
+  background-size: 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: rainbowMove 20s alternate-reverse infinite;
+}
+
+@keyframes rainbowMove {
+  0% { background-position: 0%; }
+  100% { background-position: 100%; }
 }
