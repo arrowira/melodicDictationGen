@@ -165,7 +165,7 @@ function playMelody() {
         while (unusedBeats > 2){
             let setNoteFreq = numNotes[major[randomInt(0,8)]];
             let noteLength = 1;
-            if (unusedBeats > 6){
+            if (unusedBeats > 5){
                 noteLength = randomInt(1,5, tempoWeight);
             }else{
                 if (unusedBeats > 4){

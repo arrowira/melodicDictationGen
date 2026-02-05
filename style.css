@@ -1,6 +1,12 @@
 #out {
     margin-top: 5em;
 }
+#infoTable {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
 #staff { 
     border-collapse: collapse;
     border-width: 0 1px;
