@@ -1,3 +1,12 @@
+body {
+    margin:0;
+    padding:0;
+}
+h1 {
+    margin: 0;
+    padding: 0.5em;
+}
+
 #out {
     margin-top: 5em;
 }
@@ -9,6 +18,13 @@
     background-color: rgb(234, 217, 233);
     color: rgb(0, 0, 0);
 }
+#topBar{
+    width: 100%;
+    height: 4em;
+    color: white;
+    background-color: rgb(120, 81, 128);
+}
+
 #infoTable td{
     padding: 0.5em 1em;
 }
@@ -21,6 +37,10 @@
 #infoTable td:nth-child(odd){
     background-color: rgb(221, 205, 220);
 }
+
+
+
+
 #staff { 
     border-collapse: collapse;
     border-width: 0 1px;
