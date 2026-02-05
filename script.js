@@ -133,7 +133,7 @@ function playMelody() {
 
     let measure = 0;
 
-    quarterNoteLength = Number(document.getElementById("QNlength").value);
+    quarterNoteLength = 1/(Number(document.getElementById("bpm").value)/60.0);
     beats = Number(document.getElementById("length").value)*2-1;
     tempoWeight = Number(document.getElementById("tempo").value);
 
