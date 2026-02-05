@@ -9,8 +9,17 @@
     background-color: rgb(234, 217, 233);
     color: rgb(0, 0, 0);
 }
-#paramRow {
-    padding: 3px;
+#infoTable td{
+    padding: 0.5em 1em;
+}
+#infoTable tr{
+    border: 1px solid black;
+}
+#infoTable tr:nth-child(odd){
+    background-color: rgb(234, 217, 233);
+}
+#infoTable td:nth-child(odd){
+    background-color: rgb(221, 205, 220);
 }
 #staff { 
     border-collapse: collapse;
