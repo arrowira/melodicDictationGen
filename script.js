@@ -168,8 +168,9 @@ function playMelody() {
             measureNotes.push([numNotes[0],1]);
             lastNote = 0
         }else{
-            measureNotes.push([numNotes[major[randomInt(0,8)]],1]);
-            lastNote = major[randomInt(0,8)];
+            let randomNote = major[randomInt(0,8)];
+            measureNotes.push([numNotes[randomNote],1]);
+            lastNote = randomNote;
         }
         
         while (unusedBeats > 2){
@@ -196,7 +197,7 @@ function playMelody() {
             unusedBeats-=noteLength;
             measureNotes.push([setNoteFreq,noteLength]);
 
-            lastNote = freqToNum[setNoteFreq][0];
+            lastNote = major[freqToNum[setNoteFreq][0]];
         }
         if (measure == bars-1){
             measureNotes.push([numNotes[0],unusedBeats]);
