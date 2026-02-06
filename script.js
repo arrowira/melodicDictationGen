@@ -161,16 +161,25 @@ function playMelody() {
     for (let b = 0; b<bars; b++){
         let measureNotes = [];
         let unusedBeats = 7;
+        let lastNote = -1;
 
         //create first note
         if (measure == 0){
             measureNotes.push([numNotes[0],1]);
+            lastNote = 0
         }else{
             measureNotes.push([numNotes[major[randomInt(0,8)]],1]);
+            lastNote = major[randomInt(0,8)];
         }
         
         while (unusedBeats > 2){
-            let setNoteFreq = numNotes[major[randomInt(0,8)]];
+            let setNoteFreq;
+            if (lastNote == 11){
+                setNoteFreq = numNotes[12];
+            }else{
+                setNoteFreq = numNotes[major[randomInt(0,8)]];
+            }
+           
             let noteLength = 1;
             if (unusedBeats > 5){
                 noteLength = randomInt(1,5, tempoWeight);
@@ -186,6 +195,8 @@ function playMelody() {
             
             unusedBeats-=noteLength;
             measureNotes.push([setNoteFreq,noteLength]);
+
+            lastNote = freqToNum[setNoteFreq][0];
         }
         if (measure == bars-1){
             measureNotes.push([numNotes[0],unusedBeats]);
