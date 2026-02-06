@@ -160,21 +160,27 @@ function playMelody() {
 
     for (let b = 0; b<bars; b++){
         let measureNotes = [];
-        let unusedBeats = 7;
+        
         let lastNote = -1;
 
+        let firstNoteLength = 1;
+        let randomFirstNoteLength = randomInt(1,3);
+        let unusedBeats = 8-randomFirstNoteLength;
         //create first note
         if (measure == 0){
-            measureNotes.push([numNotes[0],1]);
+            measureNotes.push([numNotes[0],2]);
+            firstNoteLength = 2;
             lastNote = 0
         }else{
             let randomNote = major[randomInt(0,8)];
-            measureNotes.push([numNotes[randomNote],1]);
+            measureNotes.push([numNotes[randomNote],randomFirstNoteLength]);
             lastNote = randomNote;
         }
         
         while (unusedBeats > 2){
             let setNoteFreq;
+
+            //make 7 go to 1
             if (lastNote == 11){
                 setNoteFreq = numNotes[12];
             }else{
