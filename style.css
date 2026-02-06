@@ -43,6 +43,7 @@ h1 {
 }
 
 button {
+    width: 10em;
     margin: 1em;
     padding: 0.5em 1em;
     font-size: 1em;
@@ -51,8 +52,6 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-#playButton {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
