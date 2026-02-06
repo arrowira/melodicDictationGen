@@ -135,6 +135,7 @@ function randomInt(min, max, weight = 1) {
 function playMelody() {
     //init and get params.
     const out = document.getElementById("out");
+    out.style.display = "none";
     out.innerHTML = "";
 
     let measure = 0;
