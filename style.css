@@ -8,10 +8,12 @@ h1 {
 }
 
 #out {
+    display: none;
     margin-top: 5em;
     padding: 50px 0px 20px 0px;
     background-color: rgb(104, 109, 115);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+
 }
 #infoTable {
     margin-left: 1em;

@@ -100,6 +100,12 @@ const numNotes = {
 };
 
 
+
+function showMelody(){
+    const out = document.getElementById("out");
+    out.style.display = "block";
+}
+
 //WWHWWWH 8 noteMap
 let major = [0, 2, 4, 5, 7, 9, 11, 12]
 
