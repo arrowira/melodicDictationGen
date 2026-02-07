@@ -256,7 +256,7 @@ function playMelody() {
         let placed = false;
         for(let row = 0; row < 10; row++){
             //place note
-            if (col == drawingProgress &&row == 7-freqToNum[notes[index][0]] && !placed) {
+            if (col == drawingProgress &&row == 8-freqToNum[notes[index][0]] && !placed) {
                 const note = document.createElement("span");
                 if (notes[index][1] == 4){
                     note.innerText = "𝅗𝅥";
