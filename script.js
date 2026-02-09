@@ -227,7 +227,7 @@ function playMelody() {
    
 
     //create sheet music
-    signatureLength = 2;
+    signatureLength = 3;
 
 
     let progress = 0;
@@ -261,19 +261,24 @@ function playMelody() {
     const startingBar = document.createElement("span");
     startingBar.innerText = "𝄀";
     startingBar.id = "barLine";
+    startingBar.style.marginLeft = "-3px";
     bar.rows[7].cells[0].appendChild(startingBar);
 
     const clef = document.createElement("span");
     clef.innerText = "𝄞";
+    
     clef.id = "note";
+    clef.style.marginLeft = "-20px";
     bar.rows[6].cells[1].appendChild(clef);
 
     const timeSigTop = document.createElement("span");
     timeSigTop.id = "timeSig";
+    timeSigTop.style.marginLeft = "-10px";
     timeSigTop.innerText = "4";
     bar.rows[0].cells[2].appendChild(timeSigTop);
     const timeSigBottom = document.createElement("span");
     timeSigBottom.id = "timeSig";
+    timeSigBottom.style.marginLeft = "-10px";
     timeSigBottom.innerText = "4";
     bar.rows[4].cells[2].appendChild(timeSigBottom);
 
