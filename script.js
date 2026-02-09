@@ -258,7 +258,7 @@ function playMelody() {
     //place clef and signature
     const clef = document.createElement("span");
     clef.innerText = "𝄞";
-    bar.rows[2].cells[0].appendChild(clef);
+    bar.rows[6].cells[0].appendChild(clef);
 
     //place notes
     for (let col = 0; col <length; col++){
