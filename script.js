@@ -256,9 +256,20 @@ function playMelody() {
     out.appendChild(bar);
 
     //place clef and signature
+    const startingBar = document.createElement("span");
+    startingBar.innerText = "𝄀";
+    bar.rows[7].cells[0].appendChild(startingBar);
+
     const clef = document.createElement("span");
     clef.innerText = "𝄞";
-    bar.rows[6].cells[0].appendChild(clef);
+    bar.rows[6].cells[1].appendChild(clef);
+
+    const timeSigTop = document.createElement("span");
+    timeSigTop.innerText = "4";
+    bar.rows[5].cells[2].appendChild(timeSigTop);
+    const timeSigBottom = document.createElement("span");
+    timeSigBottom.innerText = "4";
+    bar.rows[6].cells[2].appendChild(timeSigBottom);
 
     //place notes
     for (let col = 0; col <length; col++){
