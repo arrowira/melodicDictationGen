@@ -227,6 +227,9 @@ function playMelody() {
    
 
     //create sheet music
+    signatureLength = 2;
+
+
     let progress = 0;
     let length = beats;
     let drawingProgress = 0;
@@ -239,7 +242,7 @@ function playMelody() {
     for (let row = 0; row < 10; row++) {
         const tr = document.createElement("tr");
         tr.id = "staffRow";
-        for (let col = 0; col < length; col++) {
+        for (let col = 0; col < length+signatureLength; col++) {
             const td = document.createElement("td");
             td.id = "staffCell";
             //create line
@@ -252,6 +255,10 @@ function playMelody() {
     }
     out.appendChild(bar);
 
+    //place clef and signature
+    const clef = document.createElement("span");
+    clef.innerText = "𝄞";
+    bar.rows[2].cells[0].appendChild(clef);
 
     //place notes
     for (let col = 0; col <length; col++){
@@ -271,7 +278,7 @@ function playMelody() {
                 }
                 
                 drawingProgress+= notes[index][1];
-                bar.rows[row].cells[col].appendChild(note);
+                bar.rows[row].cells[col+signatureLength].appendChild(note);
                 index++;
                 placed = true;
             }
@@ -279,7 +286,7 @@ function playMelody() {
                 //create bar line
                 const line = document.createElement("span");
                 line.innerText = "𝄀";
-                bar.rows[row].cells[col].appendChild(line);
+                bar.rows[row].cells[col+signatureLength].appendChild(line);
             }
         }
     }
