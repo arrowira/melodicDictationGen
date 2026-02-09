@@ -247,7 +247,9 @@ function playMelody() {
             td.id = "staffCell";
             //create line
             if (row % 2 == 0) {
-                td.appendChild(document.createElement("div"));
+                line = document.createElement("div");
+                line.id = "line";
+                td.appendChild(line);
             }
             tr.appendChild(td);
         }
@@ -258,18 +260,22 @@ function playMelody() {
     //place clef and signature
     const startingBar = document.createElement("span");
     startingBar.innerText = "𝄀";
+    startingBar.id = "barLine";
     bar.rows[7].cells[0].appendChild(startingBar);
 
     const clef = document.createElement("span");
     clef.innerText = "𝄞";
+    clef.id = "note";
     bar.rows[6].cells[1].appendChild(clef);
 
     const timeSigTop = document.createElement("span");
+    timeSigTop.class = "timeSig";
     timeSigTop.innerText = "4";
     bar.rows[5].cells[2].appendChild(timeSigTop);
     const timeSigBottom = document.createElement("span");
+    timeSigBottom.class = "timeSig";
     timeSigBottom.innerText = "4";
-    bar.rows[6].cells[2].appendChild(timeSigBottom);
+    bar.rows[8].cells[2].appendChild(timeSigBottom);
 
     //place notes
     for (let col = 0; col <length; col++){
@@ -287,7 +293,7 @@ function playMelody() {
                 }else{
                     note.innerText = "𝅘𝅥𝅮";
                 }
-                
+                note.id = "note";
                 drawingProgress+= notes[index][1];
                 bar.rows[row].cells[col+signatureLength].appendChild(note);
                 index++;
@@ -296,6 +302,7 @@ function playMelody() {
             if ((col+1) % 8 == 0&& row == 7){
                 //create bar line
                 const line = document.createElement("span");
+                line.id = "barLine";
                 line.innerText = "𝄀";
                 bar.rows[row].cells[col+signatureLength].appendChild(line);
             }

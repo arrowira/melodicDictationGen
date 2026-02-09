@@ -70,7 +70,7 @@ button {
     width: 3em;
     padding: 0;
 }
-#staff #staffCell span {
+#note,#barLine{
     position: absolute;
     font-size: 68px;
     margin-top: -67px;
@@ -131,4 +131,10 @@ body{
 @keyframes rainbowMove {
   0% { background-position: 0%; }
   100% { background-position: 100%; }
+}
+
+#timeSig {
+    position: absolute;
+    font-size: 15em;
+    color: white;
 }
