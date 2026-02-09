@@ -269,13 +269,13 @@ function playMelody() {
     bar.rows[6].cells[1].appendChild(clef);
 
     const timeSigTop = document.createElement("span");
-    timeSigTop.class = "timeSig";
+    timeSigTop.id = "timeSig";
     timeSigTop.innerText = "4";
-    bar.rows[5].cells[2].appendChild(timeSigTop);
+    bar.rows[0].cells[2].appendChild(timeSigTop);
     const timeSigBottom = document.createElement("span");
-    timeSigBottom.class = "timeSig";
+    timeSigBottom.id = "timeSig";
     timeSigBottom.innerText = "4";
-    bar.rows[8].cells[2].appendChild(timeSigBottom);
+    bar.rows[4].cells[2].appendChild(timeSigBottom);
 
     //place notes
     for (let col = 0; col <length; col++){
