@@ -71,7 +71,7 @@ const freqToNum = {
 
 
 
-const numNotes = {
+const numToFreq = {
     0: noteMap["C4"],
     1: noteMap["C#4"],
     2: noteMap["D4"],
@@ -163,17 +163,17 @@ function playMelody() {
         
         let lastNote = -1;
 
-        let firstNoteLength = 1;
         let randomFirstNoteLength = randomInt(1,3);
         let unusedBeats = 8-randomFirstNoteLength;
+        console.log(unusedBeats);
         //create first note
         if (measure == 0){
-            measureNotes.push([numNotes[0],2]);
+            measureNotes.push([numToFreq[0],randomFirstNoteLength]);
             firstNoteLength = 2;
             lastNote = 0
         }else{
             let randomNote = major[randomInt(0,8)];
-            measureNotes.push([numNotes[randomNote],randomFirstNoteLength]);
+            measureNotes.push([numToFreq[randomNote],randomFirstNoteLength]);
             lastNote = randomNote;
         }
         
@@ -182,9 +182,9 @@ function playMelody() {
 
             //make 7 go to 1
             if (lastNote == 11){
-                setNoteFreq = numNotes[12];
+                setNoteFreq = numToFreq[12];
             }else{
-                setNoteFreq = numNotes[major[randomInt(0,8)]];
+                setNoteFreq = numToFreq[major[randomInt(0,8)]];
             }
            
             let noteLength = 1;
@@ -205,10 +205,12 @@ function playMelody() {
 
             lastNote = major[freqToNum[setNoteFreq][0]];
         }
+
+        //add last note
         if (measure == bars-1){
-            measureNotes.push([numNotes[0],unusedBeats]);
+            measureNotes.push([numToFreq[0],2]);
         }else{
-            measureNotes.push([numNotes[major[randomInt(0,8)]],unusedBeats]);
+            measureNotes.push([numToFreq[major[randomInt(0,8)]],2]);
         }
         
 
