@@ -107,6 +107,10 @@ function showMelody(){
     out.style.display = "block";
 }
 
+function repMelody(){
+    playMelody();
+}
+
 //WWHWWWH 8 noteMap
 let major = [0, 2, 4, 5, 7, 9, 11, 12]
 
@@ -135,7 +139,7 @@ function randomInt(min, max, weight = 1) {
 }//from min (inclusive) to max (exclusive) AKA: [min,max)
 
 
-function playMelody() {
+function generateMelody() {
     //init and get params.
     const out = document.getElementById("out");
     out.style.display = "none";
@@ -308,10 +312,10 @@ function playMelody() {
         }
     }
 
-    playMelodySound();
+    playMelody();
 
 }
-function playMelodySound(){
+function playMelody(){
     let progress = 0;
 
     if (!audioCtx) {
