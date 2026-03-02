@@ -112,13 +112,8 @@ body{
 
   background: linear-gradient(
     90deg,
-    red,
     orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
+    rgb(238, 130, 188)
   );
 
   background-size: 400%;
