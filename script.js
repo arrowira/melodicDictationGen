@@ -101,6 +101,7 @@ const numToFreq = {
 
 
 
+
 function showMelody(){
     const out = document.getElementById("out");
     out.style.display = "block";
@@ -117,7 +118,56 @@ let audioCtx;
 
 let tempoWeight = 3;
 
+let notes = [];
 
+function playMelodySound(){
+    let progress = 0;
+
+    //metronome
+    for (let i = 0; i<4; i++){
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = "square";
+        
+        osc.frequency.value = 800;
+
+        gain.gain.setValueAtTime(0.2, startTime + progress);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + progress + 0.1);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime + progress);
+        osc.stop(startTime + progress + quarterNoteLength*(notes[i][1]));
+
+        progress += quarterNoteLength*2;
+
+    }
+    //play melody
+    for (let i = 0; i<notes.length; i++){
+        let noteFreq = notes[i][0];
+        
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = "square";
+        
+        osc.frequency.value = noteFreq;
+
+        gain.gain.setValueAtTime(0.2, startTime + progress);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + progress + 2);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime + progress);
+        osc.stop(startTime + progress + quarterNoteLength*(notes[i][1]));
+
+        progress += quarterNoteLength*(notes[i][1]);
+    }
+}
 
 function randomNumWeighted(min, max, weight = 1) {
     // weight > 1 → favors lower numbers
@@ -131,6 +181,7 @@ function randomNumWeighted(min, max, weight = 1) {
 function randomInt(min, max, weight = 1) {
     return Math.floor(randomNumWeighted(min, max, weight));
 }//from min (inclusive) to max (exclusive) AKA: [min,max)
+
 
 function playMelody() {
     //init and get params.
@@ -149,7 +200,7 @@ function playMelody() {
     if (!audioCtx) {
         audioCtx = new AudioContext();
     }
-    let notes = [];
+    notes = [];
     
     let startTime = audioCtx.currentTime;
 
@@ -230,7 +281,6 @@ function playMelody() {
     signatureLength = 3;
 
 
-    let progress = 0;
     let length = beats;
     let drawingProgress = 0;
     let index = 0;
@@ -314,50 +364,6 @@ function playMelody() {
         }
     }
 
-    //metronome
-    for (let i = 0; i<4; i++){
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = "square";
-        
-        osc.frequency.value = 800;
-
-        gain.gain.setValueAtTime(0.2, startTime + progress);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + progress + 0.1);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start(startTime + progress);
-        osc.stop(startTime + progress + quarterNoteLength*(notes[i][1]));
-
-        progress += quarterNoteLength*2;
-
-    }
-    //play melody
-    for (let i = 0; i<notes.length; i++){
-        let noteFreq = notes[i][0];
-        
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = "square";
-        
-        osc.frequency.value = noteFreq;
-
-        gain.gain.setValueAtTime(0.2, startTime + progress);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + progress + 2);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start(startTime + progress);
-        osc.stop(startTime + progress + quarterNoteLength*(notes[i][1]));
-
-        progress += quarterNoteLength*(notes[i][1]);
-    }
-    
+    playMelodySound();    
 
 }
