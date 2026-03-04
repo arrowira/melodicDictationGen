@@ -112,7 +112,7 @@ function repMelody(){
 }
 
 //WWHWWWH 8 noteMap
-let major = [0, 2, 4, 5, 7, 9, 11, 12]
+let major = [ 0, 2, 3, 5, 6, 8, 10, 11, 13, 15, 16, 18]
 
 let beats = 32
 
@@ -171,7 +171,7 @@ function generateMelody() {
             firstNoteLength = 2;
             lastNote = 0
         }else{
-            let randomNote = major[randomInt(0,8)];
+            let randomNote = major[randomInt(0,12)];
             measureNotes.push([numToFreq[randomNote],randomFirstNoteLength]);
             lastNote = randomNote;
         }
@@ -183,7 +183,7 @@ function generateMelody() {
             if (lastNote == 11){
                 setNoteFreq = numToFreq[12];
             }else{
-                setNoteFreq = numToFreq[major[randomInt(0,8)]];
+                setNoteFreq = numToFreq[major[randomInt(0,12)]];
             }
            
             let noteLength = 1;
@@ -209,7 +209,7 @@ function generateMelody() {
         if (measure == bars-1){
             measureNotes.push([numToFreq[0],2]);
         }else{
-            measureNotes.push([numToFreq[major[randomInt(0,8)]],2]);
+            measureNotes.push([numToFreq[major[randomInt(0,12)]],2]);
         }
         
 
