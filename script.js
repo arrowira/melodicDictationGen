@@ -112,7 +112,7 @@ function repMelody(){
 }
 
 //WWHWWWH 8 noteMap
-let major = [ 0, 2, 3, 5, 6, 8, 10, 11, 13, 15, 16, 18]
+let major = [1, 3, 5, 6, 8, 10, 11, 13, 15, 16, 18]
 
 let beats = 32
 
@@ -171,7 +171,7 @@ function generateMelody() {
             firstNoteLength = 2;
             lastNote = 0
         }else{
-            let randomNote = major[randomInt(0,12)];
+            let randomNote = major[randomInt(0,11)];
             measureNotes.push([numToFreq[randomNote],randomFirstNoteLength]);
             lastNote = randomNote;
         }
@@ -183,7 +183,7 @@ function generateMelody() {
             if (lastNote == 11){
                 setNoteFreq = numToFreq[12];
             }else{
-                setNoteFreq = numToFreq[major[randomInt(0,12)]];
+                setNoteFreq = numToFreq[major[randomInt(0,11)]];
             }
            
             let noteLength = 1;
@@ -209,7 +209,7 @@ function generateMelody() {
         if (measure == bars-1){
             measureNotes.push([numToFreq[0],2]);
         }else{
-            measureNotes.push([numToFreq[major[randomInt(0,12)]],2]);
+            measureNotes.push([numToFreq[major[randomInt(0,11)]],2]);
         }
         
 
@@ -238,7 +238,7 @@ function generateMelody() {
     var barStaff = true;
     const bar = document.createElement("table");
     bar.id = "staff";
-    for (let row = 0; row < 20; row++) {
+    for (let row = 0; row < 14; row++) {
         if (row==10){
             barStaff = false;
         }
@@ -287,9 +287,9 @@ function generateMelody() {
     //place notes
     for (let col = 0; col <length; col++){
         let placed = false;
-        for(let row = 0; row < 10; row++){
+        for(let row = 0; row < 14; row++){
             //place note
-            if (col == drawingProgress &&row == 8-freqToNum[notes[index][0]] && !placed) {
+            if (col == drawingProgress &&row == 10-freqToNum[notes[index][0]] && !placed) {
                 const note = document.createElement("span");
                 if (notes[index][1] == 4){
                     note.innerText = "𝅗𝅥";
