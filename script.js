@@ -235,16 +235,20 @@ function generateMelody() {
 
 
     //create staff
+    var barStaff = true;
     const bar = document.createElement("table");
     bar.id = "staff";
-    for (let row = 0; row < 10; row++) {
+    for (let row = 0; row < 20; row++) {
+        if (row==10){
+            barStaff = false;
+        }
         const tr = document.createElement("tr");
         tr.id = "staffRow";
         for (let col = 0; col < length+signatureLength; col++) {
             const td = document.createElement("td");
             td.id = "staffCell";
             //create line
-            if (row % 2 == 0) {
+            if (row % 2 == 0 && barStaff) {
                 line = document.createElement("div");
                 line.id = "line";
                 td.appendChild(line);
