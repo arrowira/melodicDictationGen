@@ -183,6 +183,8 @@ function generateMelody() {
             //make 7 go to 1
             if (lastNote == 16){
                 setNoteFreq = numToFreq[17];
+            }else if (lastNote == 4){
+                setNoteFreq = numToFreq[5];
             }else{
                 setNoteFreq = numToFreq[major[randomInt(0,11)]];
             }
