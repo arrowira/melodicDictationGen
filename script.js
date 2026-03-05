@@ -164,7 +164,6 @@ function generateMelody() {
 
         let randomFirstNoteLength = randomInt(1,3);
         let unusedBeats = 8-randomFirstNoteLength;
-        console.log(unusedBeats);
         //create first note
         if (measure == 0){
             measureNotes.push([numToFreq[major[3]],randomFirstNoteLength]);
