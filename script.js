@@ -50,15 +50,15 @@ const freqToNum = {
     392.00: [4],          // G4
     415.30: [8],          // G#4 / Ab4
     440.00: [5],          // A4
-    466.16: [10],         // A#4 / Bb4
+    466.16: [6],         // A#4 / Bb4
     493.88: [6],         // B4
 
     523.25: [7],         // C5
     554.37: [13],         // C#5 / Db5
-    587.33: [14],         // D5
-    622.25: [15],         // D#5 / Eb5
-    659.25: [16],         // E5
-    698.46: [17],         // F5
+    587.33: [8],         // D5
+    622.25: [9],         // D#5 / Eb5
+    659.25: [10],         // E5
+    698.46: [11],         // F5
     739.99: [18],         // F#5 / Gb5
     783.99: [19],         // G5
     830.61: [20],         // G#5 / Ab5
@@ -112,7 +112,7 @@ function repMelody(){
 }
 
 //WWHWWWH 8 noteMap
-let major = [1, 3, 5, 6, 8, 10, 11, 13, 15, 16, 18]
+let major = [0, 2, 4, 5, 7, 9, 10, 12, 14, 16, 17]
 
 let beats = 32
 
@@ -167,7 +167,7 @@ function generateMelody() {
         console.log(unusedBeats);
         //create first note
         if (measure == 0){
-            measureNotes.push([numToFreq[0],randomFirstNoteLength]);
+            measureNotes.push([numToFreq[major[3]],randomFirstNoteLength]);
             firstNoteLength = 2;
             lastNote = 0
         }else{
@@ -180,8 +180,8 @@ function generateMelody() {
             let setNoteFreq;
 
             //make 7 go to 1
-            if (lastNote == 11){
-                setNoteFreq = numToFreq[12];
+            if (lastNote == 16){
+                setNoteFreq = numToFreq[17];
             }else{
                 setNoteFreq = numToFreq[major[randomInt(0,11)]];
             }
@@ -207,7 +207,7 @@ function generateMelody() {
 
         //add last note
         if (measure == bars-1){
-            measureNotes.push([numToFreq[0],2]);
+            measureNotes.push([numToFreq[major[3]],2]);
         }else{
             measureNotes.push([numToFreq[major[randomInt(0,11)]],2]);
         }
@@ -233,6 +233,7 @@ function generateMelody() {
     let drawingProgress = 0;
     let index = 0;
 
+    
 
     //create staff
     var barStaff = true;
@@ -289,7 +290,7 @@ function generateMelody() {
         let placed = false;
         for(let row = 0; row < 14; row++){
             //place note
-            if (col == drawingProgress &&row == 10-freqToNum[notes[index][0]] && !placed) {
+            if (col == drawingProgress &&row == 6-(freqToNum[notes[index][0]]-5) && !placed) {
                 const note = document.createElement("span");
                 if (notes[index][1] == 4){
                     note.innerText = "𝅗𝅥";
