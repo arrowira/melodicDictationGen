@@ -46,9 +46,9 @@ const freqToNum = {
     311.13: [3],          // D#4 / Eb4
     329.63: [2],          // E4
     349.23: [3],          // F4
-    369.99: [6],          // F#4 / Gb4
+    369.99: [3],          // F#4 / Gb4
     392.00: [4],          // G4
-    415.30: [8],          // G#4 / Ab4
+    415.30: [4],          // G#4 / Ab4
     440.00: [5],          // A4
     466.16: [6],         // A#4 / Bb4
     493.88: [6],         // B4
@@ -57,8 +57,8 @@ const freqToNum = {
     554.37: [13],         // C#5 / Db5
     587.33: [8],         // D5
     622.25: [9],         // D#5 / Eb5
-    659.25: [10],         // E5
-    698.46: [11],         // F5
+    659.25: [9],         // E5
+    698.46: [10],         // F5
     739.99: [18],         // F#5 / Gb5
     783.99: [19],         // G5
     830.61: [20],         // G#5 / Ab5
@@ -140,6 +140,7 @@ function randomInt(min, max, weight = 1) {
 
 
 function generateMelody() {
+    console.log("generating melody");
     //init and get params.
     const out = document.getElementById("out");
     out.style.display = "none";
@@ -178,6 +179,7 @@ function generateMelody() {
         while (unusedBeats > 2){
             let setNoteFreq;
 
+            console.log("last note: " + lastNote);
             //make 7 go to 1
             if (lastNote == 16){
                 setNoteFreq = numToFreq[17];
