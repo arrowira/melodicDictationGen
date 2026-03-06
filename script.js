@@ -236,7 +236,7 @@ function generateMelody() {
     for (let i = 0; i < notes.length; i++) {
 
         //neighbor tones
-        if (i < notes.length-3){
+        if (i < notes.length-4){
             if (getNoteNum(i) == getNoteNum(i+2)){
                 if (getNoteNum(i) == 17){
                     setNoteNum(i+1, getNoteNum(i)-1);
@@ -244,8 +244,14 @@ function generateMelody() {
                 else if(getNoteNum(i) == 0){
                     setNoteNum(i+1, getNoteNum(i)+1);
                 }
-                let rand = randomInt(0,2)-1;
+                let rand;
+                if (Math.random() < 0.5){
+                    rand = -1;
+                }else{
+                    rand = 1;
+                }
                 setNoteNum(i+1, getNoteNum(i)+rand);
+                console.log("neighbor tone at index "+i);
             }
     
         }
