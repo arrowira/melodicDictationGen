@@ -45,7 +45,7 @@ const freqToNum = {
     293.66: [1],          // D4
     311.13: [3],          // D#4 / Eb4
     329.63: [2],          // E4
-    349.23: [3],          // F4
+    349.23: [3],          // F4 tonic
     369.99: [3],          // F#4 / Gb4
     392.00: [4],          // G4
     415.30: [4],          // G#4 / Ab4
@@ -128,7 +128,8 @@ function getNoteNum(index){
     return freqToNum[notes[index][0]][0];
 }
 function setNoteNum(index, num){
-    notes[index][0] = numToFreq[num];
+
+    notes[index][0] = numToFreq[major[num]];
 }
 
 function randomNumWeighted(min, max, weight = 1) {
@@ -237,7 +238,7 @@ function generateMelody() {
         //neighbor tones
         if (i < notes.length-3){
             if (getNoteNum(i) == getNoteNum(i+2)){
-                
+                setNoteNum(i+1, getNoteNum(i)+1);
             }
     
         }
