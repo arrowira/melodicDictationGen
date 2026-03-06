@@ -238,7 +238,12 @@ function generateMelody() {
         //neighbor tones
         if (i < notes.length-3){
             if (getNoteNum(i) == getNoteNum(i+2)){
-                setNoteNum(i+1, getNoteNum(i)+1);
+                if (getNoteNum(i) == 17){
+                    setNoteNum(i+1, getNoteNum(i)-1);
+                }
+                else if(getNoteNum(i) == 0){
+                    setNoteNum(i+1, getNoteNum(i)+1);
+                }
             }
     
         }
