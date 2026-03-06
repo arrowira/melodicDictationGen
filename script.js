@@ -145,18 +145,24 @@ function randomInt(min, max, weight = 1) {
     return Math.floor(randomNumWeighted(min, max, weight));
 }//from min (inclusive) to max (exclusive) AKA: [min,max)
 
+function updateParams(){
+    quarterNoteLength = 1/(Number(document.getElementById("bpm").value)/30.0);
+    beats = Number(document.getElementById("length").value)*2-1;
+    tempoWeight = Number(document.getElementById("tempo").value);
+}
 
 function generateMelody() {
+    updateParams();
+    gen(beats, tempoWeight);
+}
+
+function gen(beats, tempoWeight) {
     //init and get params.
     const out = document.getElementById("out");
     out.style.display = "none";
     out.innerHTML = "";
 
     let measure = 0;
-
-    quarterNoteLength = 1/(Number(document.getElementById("bpm").value)/30.0);
-    beats = Number(document.getElementById("length").value)*2-1;
-    tempoWeight = Number(document.getElementById("tempo").value);
 
     notes = [];
     //generate notes by bar
