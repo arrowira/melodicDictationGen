@@ -140,7 +140,6 @@ function randomInt(min, max, weight = 1) {
 
 
 function generateMelody() {
-    console.log("generating melody");
     //init and get params.
     const out = document.getElementById("out");
     out.style.display = "none";
@@ -179,7 +178,6 @@ function generateMelody() {
         while (unusedBeats > 2){
             let setNoteFreq;
 
-            console.log("last note: " + lastNote);
             //make 7 go to 1
             if (lastNote == 16){
                 setNoteFreq = numToFreq[17];
@@ -227,6 +225,11 @@ function generateMelody() {
         measure++;
     }
    
+    //edit notes to fit conventions
+    for (let i = 0; i < notes.length; i++) {
+        var note = freqToNum[notes[i][0]][0];
+        
+    }
 
     //create sheet music
     signatureLength = 3;
