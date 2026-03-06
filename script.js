@@ -304,12 +304,18 @@ function generateMelody() {
                 }else{
                     note.innerText = "𝅘𝅥𝅮";
                 }
-                if (true){
+                if (row>9){
+                    var onEven = row%2 == 0;
+                    var start = 0;
+                    if (!onEven){
+                        start = 1;
+                    }
                     for (let i = 0; i<2; i+=1){
+
                         line = document.createElement("div");
                         line.style.width = "1.5em";
                         line.id = "line";
-                        bar.rows[row-(2*i)].cells[col+signatureLength].appendChild(line);
+                        bar.rows[row-(2*i)-start].cells[col+signatureLength].appendChild(line);
                     }
                 }
                     
