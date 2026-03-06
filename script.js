@@ -124,6 +124,12 @@ let tempoWeight = 3;
 
 let notes = [];
 
+function getNoteNum(index){
+    return freqToNum[notes[index][0]][0];
+}
+function setNoteNum(index, num){
+    notes[index][0] = numToFreq[num];
+}
 
 function randomNumWeighted(min, max, weight = 1) {
     // weight > 1 → favors lower numbers
@@ -227,7 +233,14 @@ function generateMelody() {
    
     //edit notes to fit conventions
     for (let i = 0; i < notes.length; i++) {
-        var note = freqToNum[notes[i][0]][0];
+
+        //neighbor tones
+        if (i < notes.length-3){
+            if (getNoteNum(i) == getNoteNum(i+2)){
+                
+            }
+    
+        }
         
     }
 
