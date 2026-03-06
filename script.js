@@ -244,6 +244,8 @@ function generateMelody() {
                 else if(getNoteNum(i) == 0){
                     setNoteNum(i+1, getNoteNum(i)+1);
                 }
+                let rand = randomInt(0,2)-1;
+                setNoteNum(i+1, getNoteNum(i)+rand);
             }
     
         }
