@@ -304,6 +304,17 @@ function generateMelody() {
                 }else{
                     note.innerText = "𝅘𝅥𝅮";
                 }
+                if (true){
+                    for (let i = 0; i<2; i+=1){
+                        line = document.createElement("div");
+                        line.style.width = "1.5em";
+                        line.id = "line";
+                        bar.rows[row-(2*i)].cells[col+signatureLength].appendChild(line);
+                    }
+                }
+                    
+                
+
                 note.id = "note";
                 drawingProgress+= notes[index][1];
                 bar.rows[row].cells[col+signatureLength].appendChild(note);
