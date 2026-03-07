@@ -108,6 +108,7 @@ function showMelody(){
 }
 
 function repMelody(){
+    updateParams();
     playMelody();
 }
 
@@ -223,7 +224,11 @@ function gen(beats, tempoWeight) {
         if (measure == bars-1){
             measureNotes.push([numToFreq[major[3]],2]);
         }else{
-            measureNotes.push([numToFreq[major[randomInt(0,11)]],2]);
+            finalNote = randomInt(0,11);
+            while (finalNote == 2 || finalNote == 9){
+                finalNote = randomInt(0,11);
+            }
+            measureNotes.push([numToFreq[major[finalNote]],2]);
         }
         
 
